@@ -9,10 +9,6 @@
 #import "InstagramHeaders.h"
 #import "QuickLook.h"
 
-#ifdef __cplusplus
-#define _Bool bool
-#endif
-
 #define SCILog(fmt, ...) \
     do { \
         NSString *tmpStr = [NSString stringWithFormat:(fmt), ##__VA_ARGS__]; \
