@@ -207,6 +207,73 @@
 }
 %end
 
+// Long press menu on messages
+// Demangled name: IGDirectMessageMenuConfiguration.IGDirectMessageMenuConfiguration
+%hook _TtC32IGDirectMessageMenuConfiguration32IGDirectMessageMenuConfiguration
++ (id)menuConfigurationWithEligibleOptions:(id)options
+                          messageViewModel:(id)arg2
+                               contentType:(id)arg3
+                                 isSticker:(_Bool)arg4
+                            isMusicSticker:(_Bool)arg5
+                          directNuxManager:(id)arg6
+                       sessionUserDefaults:(id)arg7
+                               launcherSet:(id)arg8
+                               userSession:(id)arg9
+                                tapHandler:(id)arg10
+{
+    NSMutableArray *filteredObjs = [NSMutableArray arrayWithCapacity:[options count]];
+
+    for (NSNumber *obj in options) {
+        BOOL shouldHide = NO;
+
+        if ([SCIUtils getBoolPref:@"hide_meta_ai"]) {
+            // Restyle
+            if ([obj isEqualToNumber:@(31)]) {
+                shouldHide = YES;
+            }
+
+            // Make AI image
+            else if ([obj isEqualToNumber:@(41)]) {
+                shouldHide = YES;
+            }
+        }
+
+        // Populate new objs array
+        if (!shouldHide) {
+            [filteredObjs addObject:obj];
+        }
+    }
+
+    return %orig([filteredObjs copy], arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+}
+%end
+
+// Expanded in-chat photo UI
+// Demangled name: IGDirectAggregatedMediaViewerComponentsSwift.IGDirectAggregatedMediaViewerViewControllerTitleViewModelObject
+%hook _TtC44IGDirectAggregatedMediaViewerComponentsSwift63IGDirectAggregatedMediaViewerViewControllerTitleViewModelObject
+- (id)initWithAuthorProfileImage:(id)arg1
+                  authorUsername:(id)arg2
+                      canForward:(_Bool)arg3
+                         canSave:(_Bool)arg4
+                   canAddToStory:(_Bool)arg5
+                canShowAIRestyle:(_Bool)arg6
+                       canUnsend:(_Bool)arg7
+                       canReport:(_Bool)arg8
+                   displayConfig:(id)arg9
+                       isPending:(_Bool)arg10
+             isMoreMenuListStyle:(_Bool)arg11
+             senderIsCurrentUser:(_Bool)arg12
+             shouldHideInfoViews:(_Bool)arg13
+                        subtitle:(id)arg14
+                      entryPoint:(long long)arg15
+                    canTapAuthor:(_Bool)arg16
+{
+    BOOL hideAiRestyle = [SCIUtils getBoolPref:@"hide_meta_ai"];
+
+    return %orig(arg1, arg2, arg3, arg4, arg5, !hideAiRestyle, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16);
+}
+%end
+
 /////////////////////////////////////////////////////////////////////////////
 
 // Explore
