@@ -35,10 +35,10 @@ A feature-rich tweak for Instagram on iOS!\
   - Enable note theming
   - Custom note themes
 - Focus/Distractions
-  - Hide explore posts grid
-  - Hide trending searches
-  - No suggested chats
   - No suggested users
+  - No suggested chats
+  - Hide trending searches
+  - Hide explore posts grid
 
 ### Feed
 - Hide stories tray
