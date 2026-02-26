@@ -19,6 +19,7 @@
 
 @interface IGActionableConfirmationToastPresenter : NSObject
 - (void)showAlertWithViewModel:(id)model isAnimated:(_Bool)animated animationDuration:(double)duration presentationPriority:(long long)priority tapActionBlock:(id)tap presentedHandler:(id)presented dismissedHandler:(id)dismissed;
+- (void)hideAlert;
 @end
 
 @interface IGRootViewController : UIViewController

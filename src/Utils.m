@@ -274,7 +274,8 @@
     [model setValue:title forKey:@"text_annotatedTitleText"];
     [model setValue:subtitle forKey:@"text_annotatedSubtitleText"];
 
-    // Show toast
+    // Show new toast, after clearing existing one
+    [toastPresenter hideAlert];
     [toastPresenter showAlertWithViewModel:model isAnimated:true animationDuration:duration presentationPriority:0 tapActionBlock:nil presentedHandler:nil dismissedHandler:nil];
 }
 
