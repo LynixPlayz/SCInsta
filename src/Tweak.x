@@ -358,7 +358,7 @@ shouldPersistLastBugReportId:(id)arg6
             
             // "Suggestions" header
             if ([[obj title] isEqualToString:@"Suggestions"]) {
-                if ([SCIUtils getBoolPref:@"hide_meta_ai"]) {
+                if ([SCIUtils getBoolPref:@"no_suggested_users"]) {
                     NSLog(@"[SCInsta] Hiding suggested chats (header: messages tab)");
 
                     shouldHide = YES;
@@ -378,7 +378,7 @@ shouldPersistLastBugReportId:(id)arg6
 
         // Suggested recipients
         else if ([obj isKindOfClass:%c(IGDirectInboxSuggestedThreadCellViewModel)]) {
-            if ([SCIUtils getBoolPref:@"hide_meta_ai"]) {
+            if ([SCIUtils getBoolPref:@"no_suggested_users"]) {
                 NSLog(@"[SCInsta] Hiding suggested chats (recipients: channels tab)");
 
                 shouldHide = YES;
