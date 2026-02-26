@@ -510,12 +510,16 @@ shouldPersistLastBugReportId:(id)arg6
         BOOL shouldHide = NO;
 
         if ([SCIUtils getBoolPref:@"no_suggested_users"]) {
-            // This hides as many recommended models as possible, without hiding genuine models
-            // Most recommended models share a 32 digit id, unlike normal accounts
-            if ([obj isKindOfClass:%c(IGStoryTrayViewModel)] && [obj.pk length] == 32) {
-                NSLog(@"[SCInsta] Hiding suggested users: story tray");
+            if ([obj isKindOfClass:%c(IGStoryTrayViewModel)]) {
+                NSNumber *type = [((IGStoryTrayViewModel *)obj) valueForKey:@"type"];
+                
+                // 8/9 looks to be the types for recommended stories
+                if ([type isEqual:@(8)] || [type isEqual:@(9)]) {
+                    NSLog(@"[SCInsta] Hiding suggested users: story tray");
 
-                shouldHide = YES;
+                    shouldHide = YES;
+
+                }
             }
         }
 
@@ -535,6 +539,15 @@ shouldPersistLastBugReportId:(id)arg6
     }
 
     return [filteredObjs copy];
+}
+%end
+
+// Story tray expanded footer (Suggested accounts to follow)
+%hook IGStoryTraySectionController
+- (void)storyTrayControllerShowSUPOGEducationBump {
+    if ([SCIUtils getBoolPref:@"no_suggested_users"]) return;
+
+    return %orig();
 }
 %end
 
