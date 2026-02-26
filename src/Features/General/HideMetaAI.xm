@@ -221,30 +221,12 @@
                                userSession:(id)arg9
                                 tapHandler:(id)arg10
 {
-    NSMutableArray *filteredObjs = [NSMutableArray arrayWithCapacity:[options count]];
+    // 31: Restyle
+    // 41: Make AI image
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (SELF IN %@)", @[ @(31), @(41) ]];
+    NSArray *newOptions = [options filteredArrayUsingPredicate:predicate];
 
-    for (NSNumber *obj in options) {
-        BOOL shouldHide = NO;
-
-        if ([SCIUtils getBoolPref:@"hide_meta_ai"]) {
-            // Restyle
-            if ([obj isEqualToNumber:@(31)]) {
-                shouldHide = YES;
-            }
-
-            // Make AI image
-            else if ([obj isEqualToNumber:@(41)]) {
-                shouldHide = YES;
-            }
-        }
-
-        // Populate new objs array
-        if (!shouldHide) {
-            [filteredObjs addObject:obj];
-        }
-    }
-
-    return %orig([filteredObjs copy], arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+    return %orig([newOptions copy], arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 }
 %end
 
