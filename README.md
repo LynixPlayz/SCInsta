@@ -47,12 +47,15 @@ A feature-rich tweak for Instagram on iOS!\
 - No suggested for you (accounts)
 - No suggested reels
 - No suggested threads posts
+- Disable video autoplay
 
 ### Reels
 - Modify tap controls
 - Always show progress scrubber
+- Disable auto-unmuting reels
 - Confirm reel refresh
 - Hide reels header
+- Hide reels blend button
 - Disable scrolling reels
 - Prevent doom scrolling (limit maximum viewable reels)
 
