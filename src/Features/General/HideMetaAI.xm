@@ -492,3 +492,36 @@
     }
 }
 %end
+
+// Share menu recipients
+%hook IGDirectRecipientListViewController
+- (id)objectsForListAdapter:(id)arg1 {
+    NSArray *originalObjs = %orig();
+    NSMutableArray *filteredObjs = [NSMutableArray arrayWithCapacity:[originalObjs count]];
+
+    for (id obj in originalObjs) {
+        BOOL shouldHide = NO;
+
+        if ([SCIUtils getBoolPref:@"hide_meta_ai"]) {
+            if ([obj isKindOfClass:%c(IGDirectRecipientCellViewModel)]) {
+
+                // Meta AI (catch-all)
+                if ([[[obj recipient] threadName] isEqualToString:@"Meta AI"]) {
+                    NSLog(@"[SCInsta] Hiding meta ai suggested as recipient (share menu)");
+
+                    shouldHide = YES;
+                }
+
+            }
+        }
+
+        // Populate new objs array
+        if (!shouldHide) {
+            [filteredObjs addObject:obj];
+        }
+
+    }
+
+    return [filteredObjs copy];
+}
+%end
