@@ -254,6 +254,9 @@
 };
 
 // Toasts
++ (void)showToastForDuration:(double)duration title:(NSString *)title {
+    [SCIUtils showToastForDuration:duration title:title subtitle:nil];
+}
 + (void)showToastForDuration:(double)duration title:(NSString *)title subtitle:(NSString *)subtitle {
     // Root VC
     Class rootVCClass = NSClassFromString(@"IGRootViewController");

@@ -70,6 +70,7 @@
 + (void)showRestartConfirmation;
 
 // Toasts
++ (void)showToastForDuration:(double)duration title:(NSString *)title;
 + (void)showToastForDuration:(double)duration title:(NSString *)title subtitle:(NSString *)subtitle;
 
 // Math
