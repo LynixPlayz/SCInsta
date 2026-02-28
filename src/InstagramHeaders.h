@@ -479,6 +479,13 @@
 @interface IGDirectThreadThemePickerOption : NSObject
 @end
 
+@interface IGCreationActionBarButton : UIButton
+@end
+
+@interface IGCreationActionBarLabeledButton : NSObject
+@property (readonly, nonatomic) IGCreationActionBarButton *button;
+@end
+
 
 
 /////////////////////////////////////////////////////////////////////////////

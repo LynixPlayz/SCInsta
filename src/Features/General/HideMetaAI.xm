@@ -400,6 +400,28 @@
 }
 %end
 
+// "Imagine background" in story editor vertical action bar
+%hook _TtC17IGCreationOSSwift19IGCreationHeaderBar
+- (void)setButtons:(id)buttons maxItems:(NSInteger)max {
+    NSArray *filteredObjs = buttons;
+
+    if ([SCIUtils getBoolPref:@"hide_meta_ai"]) {
+        filteredObjs = [filteredObjs filteredArrayUsingPredicate:
+            [NSPredicate predicateWithBlock:^BOOL(IGCreationActionBarLabeledButton *obj, NSDictionary *bindings) {
+
+                return !(
+                    obj.button
+                    && [((IGCreationActionBarButton *)obj.button).accessibilityIdentifier isEqualToString:@"contextual-background"]
+                );
+                
+            }]
+        ];
+    }
+
+    %orig(filteredObjs, max);
+}
+%end
+
 /////////////////////////////////////////////////////////////////////////////
 
 // Other
