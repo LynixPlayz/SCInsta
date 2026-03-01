@@ -31,6 +31,12 @@ static char rowStaticRef[] = "row";
                     [mutableSections removeObjectAtIndex:index];
                 }
             }
+
+            else if ([section[@"header"] isEqualToString:@"Experimental"]) {
+                if (![[SCIUtils IGVersionString] hasSuffix:@"-dev"]) {
+                    [mutableSections removeObjectAtIndex:index];
+                }
+            }
             
         }];
         
