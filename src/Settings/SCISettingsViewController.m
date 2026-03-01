@@ -238,6 +238,9 @@ static char rowStaticRef[] = "row";
             vc.title = row.title;
             [self.navigationController pushViewController:vc animated:YES];
         }
+        else if (row.navViewController) {
+            [self.navigationController pushViewController:row.navViewController animated:YES];
+        }
     }
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
